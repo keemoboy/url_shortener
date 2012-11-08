@@ -1,4 +1,6 @@
 UrlShortener::Application.routes.draw do
+  resources :redirects
+
   root :to => 'shorten_urls#index'
 
   resources :shorten_urls

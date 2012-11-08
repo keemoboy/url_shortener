@@ -1,6 +1,9 @@
 class ShortenUrlsController < ApplicationController
   # GET /shorten_urls
   # GET /shorten_urls.json
+
+  after_filter :increment_redirect_count, :only => :show
+
   def index
     @shorten_urls = ShortenUrl.all
 
@@ -14,7 +17,7 @@ class ShortenUrlsController < ApplicationController
   # GET /shorten_urls/1.json
   def show
     @shorten_url = ShortenUrl.find(params[:id])
-    redirect_to("http://" + @shorten_url.source_url)
+    redirect_to @shorten_url.source_url
 
     # respond_to do |format|
     #   format.html # show.html.erb
@@ -80,5 +83,11 @@ class ShortenUrlsController < ApplicationController
       format.html { redirect_to shorten_urls_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def increment_redirect_count
+    @shorten_url.create_redirect
   end
 end

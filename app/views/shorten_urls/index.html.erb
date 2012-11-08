@@ -13,9 +13,12 @@
     <td>
       <%= shorten_url.source_url %>
 
-      <b>Your new shortened URL:</b>
+      <b>Your new shortened URL is:</b>
       <%= link_to "#{shorten_url_path(shorten_url)}", shorten_url %>
+
+       <b>and it's been visited <%= shorten_url.times_visited %> times</b>
     </td>
+
 
     <td><%= link_to 'Show', shorten_url %></td>
     <td><%= link_to 'Edit', edit_shorten_url_path(shorten_url) %></td>
