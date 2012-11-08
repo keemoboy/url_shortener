@@ -1,9 +1,11 @@
 UrlShortener::Application.routes.draw do
+  resources :users do
+    resources :shorten_urls
+  end
+
   resources :redirects
 
-  root :to => 'shorten_urls#index'
-
-  resources :shorten_urls
+  root :to => 'users#index'
 
   # match 'shorten_urls/:id' => shorten_urls.source_url
 

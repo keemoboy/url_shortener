@@ -5,6 +5,7 @@ class ShortenUrl < ActiveRecord::Base
   attr_accessible :source_url
 
   has_many :redirects
+  belongs_to :user
 
   def create_redirect
     self.redirects.create

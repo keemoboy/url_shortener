@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121107233745) do
+ActiveRecord::Schema.define(:version => 20121108002345) do
 
   create_table "redirects", :force => true do |t|
     t.integer  "shorten_url_id"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(:version => 20121107233745) do
 
   create_table "shorten_urls", :force => true do |t|
     t.text     "source_url"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

@@ -2,6 +2,7 @@ class ShortenUrlsController < ApplicationController
   # GET /shorten_urls
   # GET /shorten_urls.json
 
+  before_filter :load_user
   after_filter :increment_redirect_count, :only => :show
 
   def index
@@ -17,7 +18,7 @@ class ShortenUrlsController < ApplicationController
   # GET /shorten_urls/1.json
   def show
     @shorten_url = ShortenUrl.find(params[:id])
-    redirect_to @shorten_url.source_url
+    #redirect_to @shorten_url.source_url
 
     # respond_to do |format|
     #   format.html # show.html.erb
@@ -28,7 +29,7 @@ class ShortenUrlsController < ApplicationController
   # GET /shorten_urls/new
   # GET /shorten_urls/new.json
   def new
-    @shorten_url = ShortenUrl.new
+    @shorten_url = @user.shorten_urls.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,11 +45,11 @@ class ShortenUrlsController < ApplicationController
   # POST /shorten_urls
   # POST /shorten_urls.json
   def create
-    @shorten_url = ShortenUrl.new(params[:shorten_url])
+    @shorten_url = @user.shorten_urls.build(params[:shorten_url])
 
     respond_to do |format|
       if @shorten_url.save
-        format.html { redirect_to shorten_urls_path, notice: 'Shorten url was successfully created.' }
+        format.html { redirect_to user_shorten_url_path(@user, @shorten_url), notice: 'Shorten url was successfully created.' }
         format.json { render json: @shorten_url, status: :created, location: @shorten_url }
       else
         format.html { render action: "new" }
@@ -64,7 +65,7 @@ class ShortenUrlsController < ApplicationController
 
     respond_to do |format|
       if @shorten_url.update_attributes(params[:shorten_url])
-        format.html { redirect_to shorten_urls_path, notice: 'Shorten url was successfully updated.' }
+        format.html { redirect_to user_shorten_url_path(@user, @shorten_url), notice: 'Shorten url was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -89,5 +90,9 @@ class ShortenUrlsController < ApplicationController
 
   def increment_redirect_count
     @shorten_url.create_redirect
+  end
+
+  def load_user
+    @user = User.find(params[:user_id])
   end
 end

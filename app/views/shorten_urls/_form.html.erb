@@ -1,4 +1,4 @@
-<%= form_for(@shorten_url) do |f| %>
+<%= form_for([@user, @shorten_url]) do |f| %>
   <% if @shorten_url.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@shorten_url.errors.count, "error") %> prohibited this shorten_url from being saved:</h2>

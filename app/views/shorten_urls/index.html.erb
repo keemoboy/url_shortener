@@ -14,14 +14,14 @@
       <%= shorten_url.source_url %>
 
       <b>Your new shortened URL is:</b>
-      <%= link_to "#{shorten_url_path(shorten_url)}", shorten_url %>
+      <%= link_to "#{user_shorten_url_path(shorten_url)}", shorten_url %>
 
        <b>and it's been visited <%= shorten_url.times_visited %> times</b>
     </td>
 
 
     <td><%= link_to 'Show', shorten_url %></td>
-    <td><%= link_to 'Edit', edit_shorten_url_path(shorten_url) %></td>
+    <td><%= link_to 'Edit', edit_user_shorten_url_path(shorten_url) %></td>
     <td><%= link_to 'Destroy', shorten_url, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
@@ -29,4 +29,4 @@
 
 <br />
 
-<%= link_to 'New Shorten url', new_shorten_url_path %>
+<%= link_to 'New Shorten url', new_user_shorten_url_path %>

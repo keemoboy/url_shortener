@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @shorten_url %> |
-<%= link_to 'Back', shorten_urls_path %>
+<%= link_to 'Show', user_shorten_url_path(@user, @shorten_url) %> |
+<%= link_to 'Back', user_shorten_url_path(@user, @shorten_url) %>
